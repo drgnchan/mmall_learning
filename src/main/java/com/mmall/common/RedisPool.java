@@ -44,12 +44,5 @@ public class RedisPool {
         pool.returnBrokenResource(jedis);
     }
 
-    public static void main(String[] args) {
-        Jedis jedis=pool.getResource();
-        jedis.set("raymond","handsomeraymond");
-        returnResource(jedis);
 
-        pool.destroy();
-        System.out.println("program is done");
-    }
 }

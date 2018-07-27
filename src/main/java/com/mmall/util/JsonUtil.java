@@ -95,36 +95,5 @@ public class JsonUtil {
 
 
 
-    public static void main(String[] args) {
-        User u1 = new User();
-        u1.setUsername("1");
-        u1.setEmail("raymond@163.com");
-
-        User u2 = new User();
-        u2.setUsername("2");
-        u2.setEmail("raymond2@163.com");
-
-        List<User> userList = Lists.newArrayList();
-        userList.add(u1);
-        userList.add(u2);
-
-
-        String u1Json = JsonUtil.obj2String(u1);
-        String u1JsonPretty = JsonUtil.obj2StringPretty(u1);
-        String userListJson = JsonUtil.obj2StringPretty(userList);
-        log.info("user1Json:{}", u1Json);
-        log.info("user1JsonPretty:{}", u1JsonPretty);
-
-        log.info("++++++++++++++++++++");
-        log.info("UserList:{}", userListJson);
-        List<User> userList1=Lists.newArrayList();
-        userList1=JsonUtil.string2Obj(userListJson, new TypeReference<List<User>>(){
-        });
-        log.info("userList1:{}",userList1);
-
-        List<User> userList2=JsonUtil.string2Obj(userListJson,List.class,User.class);
-
-
-    }
 
 }
