@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 @Slf4j
 public class CookieUtil {
-    private final static String COOKIE_DOMAIN=".happymmall.com";
+    private final static String COOKIE_DOMAIN=".raymond23.com";
     private final static String COOKIE_NAME="mmall_login_token";
 
     public static String readLoginCookie(HttpServletRequest request){
