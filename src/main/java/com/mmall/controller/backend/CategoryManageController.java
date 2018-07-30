@@ -57,6 +57,8 @@ public class CategoryManageController {
 //            return ServerResponse.createByErrorMessage("无权限操作,需要管理员权限");
 //        }
 
+
+        //全部通过拦截器验证 下同
         return iCategoryService.addCategory(categoryName, parentId);
     }
 

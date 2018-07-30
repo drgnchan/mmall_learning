@@ -47,12 +47,14 @@ public class AuthorityInterceptor implements HandlerInterceptor {
             }
             requestParamBuffer.append(mapKey).append("=").append(mapValue);
         }
-        if(StringUtils.equals(className,"UserManageController")&&StringUtils.equals(methodName,"login")){
-            log.info("权限拦截器拦截到请求，classname:{},methodname:{}",className,methodName);
+        //解决由于拦截login.do造成的死循环
+        if (StringUtils.equals(className, "UserManageController") && StringUtils.equals(methodName, "login")) {
+            log.info("权限拦截器拦截到请求，classname:{},methodname:{}", className, methodName);
             //如果是拦截到登录请求，不打印参数，因为参数里面有密码，防止泄露
             return true;
         }
-        log.info("权限拦截器拦截到请求，classname:{},methodname:{},param:{}",className,methodName,requestParamBuffer.toString());
+
+        log.info("权限拦截器拦截到请求，classname:{},methodname:{},param:{}", className, methodName, requestParamBuffer.toString());
 
         User user = null;
         String loginToken = CookieUtil.readLoginCookie(httpServletRequest);
@@ -69,13 +71,13 @@ public class AuthorityInterceptor implements HandlerInterceptor {
             httpServletResponse.setContentType("application/json;charset=UTF-8");
             PrintWriter out = httpServletResponse.getWriter();
             if (user == null) {
+                //富文本特殊处理
                 if (StringUtils.equals(className, "ProductManagerController") && StringUtils.equals(methodName, "richtextUpload")) {
                     Map resultMap = Maps.newHashMap();
                     resultMap.put("success", false);
                     resultMap.put("msg", "请登录管理员");
                     out.print(JsonUtil.obj2String(resultMap));
-
-                } else {
+                }else {
                     out.print(JsonUtil.obj2String(ServerResponse.createByErrorMessage("拦截器拦截，用户未登录")));
                 }
             } else {
@@ -92,7 +94,6 @@ public class AuthorityInterceptor implements HandlerInterceptor {
             out.close();
             return false;
         }
-
         return true;
     }
 

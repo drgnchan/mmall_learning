@@ -33,7 +33,7 @@ public class UserManageController {
             User user=response.getData();
             if(user.getRole()==Const.Role.ROLE_ADMIN){
                 CookieUtil.wtriteLoginToken(httpServletResponse,session.getId());
-                RedisShardedPoolUtil.setEx(session.getId(),Const.RedisCacheExTime.REDIS_SESSION_EXTIME,JsonUtil.obj2String(httpServletResponse));
+                RedisShardedPoolUtil.setEx(session.getId(),Const.RedisCacheExTime.REDIS_SESSION_EXTIME,JsonUtil.obj2String(response.getData()));
                 return response;
             }else{
                 return ServerResponse.createByErrorMessage("不是管理员,无法登录");
