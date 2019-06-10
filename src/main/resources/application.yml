@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    username: root
+    password: 6636
+    url: jdbc:mysql://localhost:3306/mmall?useUnicode=true&characterEncoding=utf8&useSSL=false&allowMultiQueries=true&serverTimezone=Hongkong
+    driver-class-name: com.mysql.jdbc.Driver
+    druid:
+      db-type: mysql
+  redis:
+    host: localhost
+    port: 6379
+  main:
+    allow-bean-definition-overriding: true
+
+
+
+lock:
+  timeout: 5000
+redis1:
+  ip: 127.0.0.1
+  port: 6379
